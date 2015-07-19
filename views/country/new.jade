@@ -1,0 +1,14 @@
+extends ../layout
+block content
+  h1 Add A country
+  form(action='/' method='post')
+    label Country Name
+      input(type='text' name='country' id='country')
+    label Flag
+      input(type='url' name='flag' id='flag')
+    p
+    label Capital
+      input(type='text' name='capital' id='capital')
+    label Population
+      input(type='number' name='population' id='population')
+    input(type='submit' value='Add Country')  
