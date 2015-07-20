@@ -53,8 +53,47 @@ app.get('/country/:id', function (req, res, next) {
       res.render('/404')
     } else {
       res.render('country/show', {country: country})
-  }
+    }
+  })
 })
+
+app.get('/country/:id/edit', function (req, res, next) {
+  db.Country.findById({_id: req.params.id}, function (err, country) {
+    if(err){
+      res.render('/404')
+    } else {
+      res.render('country/edit', {country: country})
+    }
+  })
+})
+
+app.post('/country/:id', function (req, res, next) {
+  db.Country.findByIdAndUpdate({
+    _id: req.params.id}, {
+    country: req.body.country,
+    flag: req.body.flag,
+    capital: req.body.capital,
+    population: req.body.population
+  }, function (err, country) {
+    // body...
+  if(err){
+    res.redirect('/404');
+  } else {
+    res.redirect('/');
+  }
+  })
+})
+
+app.post('/country/:id/delete', function (req, res, next) {
+  db.Country.remove({_id: req.params.id}, function (err, country) {
+    if(err){
+      res.redirect('/404')
+    } else {
+      res.redirect('/')
+    }
+  })
+})
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');

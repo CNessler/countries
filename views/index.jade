@@ -14,9 +14,13 @@ block content
       //for each function here
       each country in countries
         tr
-          td= country.country
+          td
+            a(href='/country/' + country._id)= country.country
           td= country.flag
           td= country.capital
           td= country.population
           td
-            a(href='/country/'+ country._id) Edit
+            a(href='/country/'+ country._id + '/edit') Edit
+          td
+            form(action='/country/' + country._id + '/delete' method='post') 
+              input(type='submit' value='Delete')

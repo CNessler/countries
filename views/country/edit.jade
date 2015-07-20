@@ -1,3 +1,17 @@
 extends ../layout
 block content
-  h1 I'm the edit page
+  h1= country.country
+  form(action='/country/' + country._id method='post')
+    label Country Name
+      input(type='text' name='country' id='country')
+      p
+    label Flag
+      input(type='url' name='flag' id='flag')
+    p
+    label Capital
+      input(type='text' name='capital' id='capital')
+      p
+    label Population
+      input(type='number' name='population' id='population')
+      p
+    input(type='submit' value='Edit')  
