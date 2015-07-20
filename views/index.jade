@@ -12,3 +12,11 @@ block content
         th Population
     tbody
       //for each function here
+      each country in countries
+        tr
+          td= country.country
+          td= country.flag
+          td= country.capital
+          td= country.population
+          td
+            a(href='/country/'+ country._id) Edit

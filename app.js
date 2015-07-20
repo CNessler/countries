@@ -24,7 +24,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', users);
 
 app.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  db.Country.find({}, function (err, country) {
+    if (err){
+      res.redirect('/404');
+    } else {
+      res.render('index', {countries: country});
+    }
+  })
 });
 
 app.get('/country/new', function (req, res, next) {
@@ -41,6 +47,14 @@ app.post('/', function (req, res, next) {
   res.redirect('/');
 })
 
+app.get('/country/:id', function (req, res, next) {
+  db.Country.findById({_id: req.params.id}, function (err, country) {
+    if(err){
+      res.render('/404')
+    } else {
+      res.render('country/show', {country: country})
+  }
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
